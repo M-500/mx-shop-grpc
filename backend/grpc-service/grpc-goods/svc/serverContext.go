@@ -8,9 +8,9 @@ package svc
 import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"grpc-user/config"
-	"grpc-user/model"
-	"grpc-user/pkg/utils"
+	"grpc-goods/config"
+	"grpc-goods/model"
+	"grpc-goods/pkg/utils"
 	"log"
 	"os"
 	"time"
