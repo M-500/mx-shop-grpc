@@ -9,8 +9,8 @@
 package tools
 
 import (
+	e "gin-user/pkg/constant"
 	"github.com/gin-gonic/gin"
-	e "ludaxf_django/pkg/constant"
 	"net/http"
 )
 

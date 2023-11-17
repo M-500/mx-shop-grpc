@@ -8,9 +8,9 @@ package tools
 
 import (
 	"fmt"
+	"gin-user/pkg/validators"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"ludaxf_django/pkg/validators"
 	"strings"
 )
 

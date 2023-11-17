@@ -7,9 +7,9 @@
 package middlewares
 
 import (
+	"gin-user/app/models/form"
+	"gin-user/pkg/constant"
 	"github.com/gin-gonic/gin"
-	"ludaxf_django/app/models/form"
-	"ludaxf_django/pkg/constant"
 )
 
 func PaginationMiddleware() gin.HandlerFunc {
