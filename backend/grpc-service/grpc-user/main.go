@@ -9,8 +9,12 @@ import (
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/health"
+	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/reflection"
 	"grpc-user/handler"
+	"grpc-user/pkg/general"
+	"grpc-user/pkg/utils/str"
 	"grpc-user/proto"
 	"grpc-user/svc"
 	"net"
@@ -24,7 +28,8 @@ var (
 
 func main() {
 	serSvc := svc.NewSrvCtx(configPath)
-	fmt.Println(serSvc.Config.MySQl.Datasource)
+	cfg := serSvc.Config
+	consulAddr := fmt.Sprintf("%s:%d", cfg.ConsulCfg.Host, cfg.ConsulCfg.Port)
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", *IP, *Port))
 	if err != nil {
 		panic("failed to listen:" + err.Error())
@@ -32,6 +37,12 @@ func main() {
 	server := grpc.NewServer()
 	proto.RegisterUserServer(server, &handler.UserService{})
 	reflection.Register(server) // 方便grpcUI 调试
+
+	// 注册健康检查
+	grpc_health_v1.RegisterHealthServer(server, health.NewServer())
+	// 注册服务
+	general.Register(*IP, *Port, cfg.Name, []string{"test", "fuck"}, str.UUID(), consulAddr)
+
 	err = server.Serve(lis)
 	if err != nil {
 		panic("failed to start grpc:" + err.Error())
@@ -39,7 +50,7 @@ func main() {
 }
 
 func init() {
-	IP = flag.String("ip", "0.0.0.0", "IP地址")
+	IP = flag.String("ip", "192.168.1.51", "IP地址")
 	Port = flag.Int("port", 8023, "端口号")
 	flag.StringVar(&configPath, "cfg", "dev.yaml", "配置文件路径")
 	flag.Parse()

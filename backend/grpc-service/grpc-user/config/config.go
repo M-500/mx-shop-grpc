@@ -14,12 +14,13 @@ import (
 var ConfigInstance *Config
 
 type Config struct {
-	Name  string       `mapstructure:"name"`
-	Host  string       `mapstructure:"host"`
-	Local string       `mapstructure:"local"`
-	Port  int          `mapstructure:"port"`
-	MySQl cfg.MysqlCfg `mapstructure:"mysql"`
-	Redis cfg.RedisCfg `mapstructure:"redis"`
+	Name      string        `mapstructure:"name"`
+	Host      string        `mapstructure:"host"`
+	Local     string        `mapstructure:"local"`
+	Port      int           `mapstructure:"port"`
+	ConsulCfg cfg.ConsulCfg `mapstructure:"consul_cfg"`
+	MySQl     cfg.MysqlCfg  `mapstructure:"mysql"`
+	Redis     cfg.RedisCfg  `mapstructure:"redis"`
 }
 
 func NewConfig(path string) *Config {

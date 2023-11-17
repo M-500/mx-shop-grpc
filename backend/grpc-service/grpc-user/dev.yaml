@@ -8,3 +8,6 @@ redis:
   host: "127.0.0.1"
   port: 6379
   pass: ""
+consul_cfg:
+  host: "192.168.1.52"
+  port: 8500
