@@ -33,3 +33,22 @@ func Register(serverIP string, serverPort int, serverName string, serverTags []s
 		panic(err)
 	}
 }
+
+func DeregisterService(srvID string, consulConnStr string) error {
+	config := api.DefaultConfig()
+	config.Address = consulConnStr // 这里是Consul的IP和地址
+	client, err := api.NewClient(config)
+	if err != nil {
+		return err
+	}
+
+	agent := client.Agent()
+
+	err = agent.ServiceDeregister(srvID)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("Service deregistered successfully!")
+	return nil
+}
