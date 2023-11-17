@@ -13,7 +13,6 @@ import (
 	"github.com/anaskhan96/go-password-encoder"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"google.golang.org/protobuf/types/known/emptypb"
 	"grpc-user/model"
 	"grpc-user/proto"
 	"grpc-user/svc"
@@ -23,20 +22,6 @@ type UserService struct {
 	proto.UnimplementedUserServer
 }
 
-/* 获取用户列表*/
-func (u *UserService) GetUserList(ctx context.Context, req *proto.PageInfo) (resp *proto.UserListResponse, err error) {
-	// 获取用户列表
-	var users []model.UserInfoModel
-	srvCtx := svc.GetSrvCtx()
-	srvCtx.MysqlConn.Find(&users)
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserList not implemented")
-}
-func (u *UserService) GetUserByMobile(ctx context.Context, req *proto.MobileRequest) (resp *proto.UserInfoResponse, err error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserByMobile not implemented")
-}
-func (u *UserService) GetUserById(ctx context.Context, req *proto.IdRequest) (resp *proto.UserInfoResponse, err error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserById not implemented")
-}
 func (u *UserService) CreateUser(ctx context.Context, req *proto.CreateUserInfo) (resp *proto.UserInfoResponse, err error) {
 	// 新增用户
 	var user model.UserInfoModel
@@ -59,10 +44,4 @@ func (u *UserService) CreateUser(ctx context.Context, req *proto.CreateUserInfo)
 	resp.NickName = user.NickName
 	resp.Gender = user.Gender
 	return resp, nil
-}
-func (u *UserService) UpdateUser(ctx context.Context, req *proto.UpdateUserInfo) (resp *emptypb.Empty, err error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
-}
-func (u *UserService) CheckPassWord(ctx context.Context, req *proto.PasswordCheckInfo) (resp *proto.CheckResponse, err error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckPassWord not implemented")
 }
