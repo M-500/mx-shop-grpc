@@ -1,0 +1,13 @@
+Name: mx-shop-user-srv-grpc
+Host: 127.0.0.1
+Port: 8800
+local: "zh"
+mysql:
+  DataSource: "root:123456@tcp(127.0.0.1:3306)/mx-shop-user?charset=utf8mb4&parseTime=True&loc=Local"
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  pass: ""
+consul_cfg:
+  host: "127.0.0.1"
+  port: 8500

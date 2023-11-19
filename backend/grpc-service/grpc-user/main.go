@@ -65,9 +65,9 @@ func main() {
 }
 
 func init() {
-	IP = flag.String("ip", "192.168.1.51", "IP地址")
+	IP = flag.String("ip", "192.168.1.101", "IP地址")
 	Port = flag.Int("port", 50051, "端口号")
-	flag.StringVar(&configPath, "cfg", "dev.yaml", "配置文件路径")
+	flag.StringVar(&configPath, "cfg", "./etc/dev.yaml", "配置文件路径")
 	flag.Parse()
 	fmt.Println(*IP, *Port)
 }
